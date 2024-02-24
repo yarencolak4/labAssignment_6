@@ -1,8 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int search(int numbers[], int low, int high, int value) 
+{ if (low <= high) //value is not found if low is bigger than high (base condition)
 {
-	return -1;
+	int mid = low + (high - low) / 2; //calculating the mid of the array or (high+low)/2
+	if (numbers[mid] ==value) { //seeing whether mid us equal to the value 
+			return mid; 	} //if so, return 
+		else if(numbers[mid] > value) {  //if not,..
+			return search(numbers, low, mid-1, value);} //if value is smaller than mid, check left 
+			else {
+				return search(numbers, mid+1, high, value); //if value is bigger than mid, check right 
+		}
+}
+	return -1; //value is not found in the array
 }
 
 void printArray(int numbers[], int sz)
@@ -58,4 +69,3 @@ int main(void)
 
 	fclose(inFile);
 }
-t
